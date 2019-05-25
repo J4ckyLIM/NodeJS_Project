@@ -1,30 +1,16 @@
-let express = require('express')
-let router = express.Router();
-let User = require('../models/user.model')
+const express = require('express');
+const router = require('express-promise-router')();
 
-router.post('/register', (request, response) =>{
-    let user = new User({
-        name: request.body.name,
-        email: request.body.email,
-        password: request.body.password
-    })
+const { validateBody, schemas } = require('../helpers/routeHelper');
+const UsersController = require('../controllers/user.controller');
 
-    User.addUser(user, (err, result)=>{
-        if(err){
-            return response.json({success: false, message: err})
-        }
+router.route('/signup')
+  .post(validateBody(schemas.authSchema), UsersController.signUp);
 
-        return response.json({success: true, message: SpeechRecognitionResultList})
-    })
-})
+router.route('/signin')
+  .post(UsersController.signIn);
 
-router.post('/login', (request, response)=>{
-    User.login(request.body.email, request.body.password, (err, result)=> {
-        if(err){
-            return response.json({success: false, message: err})
-        }
-        return response.json({success: true, message: result})
-    })
-})
+router.route('/secret')
+  .get(UsersController.secret);
 
-module.exports = router
+module.exports = router;

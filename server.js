@@ -1,29 +1,32 @@
-let express = require('express')
-let app = express()
-let bodyParser = require ('body-parser')
-let session = require('express-session')
-let mongoose = require('mongoose')
-let config = require('./config')
-let userRoute = require('./routes/user.route')
+const express = require('express')
+const morgan = require('morgan');
+const bodyParser = require ('body-parser')
+const session = require('express-session')
+const mongoose = require('mongoose')
+const config = require('./config')
+const userRoute = require('./routes/user.route')
 
+const app = express()
 // Connection to MongoDB
 
-let db = mongoose.connection
+const db = mongoose.connection
+
 mongoose.connect(config.dbUrl, {useNewUrlParser: true})
 mongoose.set('useCreateIndex', true)
 
 db.on('open', ()=>{
-    console.log("Mongoose default connection is open")
+    console.log("Connected to MongoDB")
 })
 
 db.on('error', err => {
     console.log('Erreur de connection' + err)
 })
 
-// Moteur de template
+// Templating
 app.set('view engine', 'ejs')
 
 // Middleware
+app.use(morgan('dev'));
 app.use('/assets', express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
@@ -38,7 +41,9 @@ app.use(require('./middlewares/flash'))
 
 // Routes
 
-app.get('/', (request, response) =>{
+app.use('/users', require('./routes/user.route'));
+
+/*app.get('/', (request, response) =>{
     console.log(request.session)
     response.render('pages/index')
 })
@@ -50,9 +55,10 @@ app.post('/', (request, response) =>{
     } else {
         let User = require('./models/user.model')
     }
-})
+}) */
 
 app.listen(config.port, ()=>{
     console.log('Express app listening')
 })
 
+module.exports = app

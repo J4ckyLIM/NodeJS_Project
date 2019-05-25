@@ -1,14 +1,19 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+
+// User Schema
+
 const userSchema = mongoose.Schema({
     name:{
         type: String,
-        required: true
+        required: true,
+        validate: /[a-z]/
     },
     email:{
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        lowercase: true
     },
     password:{
         type: String,
@@ -16,30 +21,12 @@ const userSchema = mongoose.Schema({
     }
 })
 
-let User = mongoose.model('User', userSchema);
 
-class Usere {
+// User model
 
-    static create(name, email, password){
-         mongoose.connect("mongodb://localhost:27017/test", (err, db)=>{
-             db.collection('user').insertOne(jsonObj, function(err, response){
-                 if(err) throw err
-                 console.log("1 Document inserted")
-                 db.close()
-             })
-         })
-    }
-}
+const User = mongoose.model('users', userSchema);
 
-var Test1 = new User({
-    name: "BIOUP",
-    email: "sofjdfd@gmx.fr",
-    password: "dkfjdsjkgfdks"
-})
 
-Test1.save(function(err, Test1){
-    if(err) throw err
-})
 // Saving the user in our Database
 /*
 User.addUser = function (user, callback){
@@ -88,6 +75,6 @@ User.login = function(email, password, callback){
             })
         }
     })
-}*/
-
+}
+*/
 module.exports = User
