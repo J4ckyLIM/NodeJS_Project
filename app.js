@@ -40,19 +40,6 @@ app.use(require('./middlewares/flash'))
 
 app.use('/users', require('./routes/user.route'));
 
-/*app.get('/', (request, response) =>{
-    console.log(request.session)
-    response.render('pages/index')
-})
-
-app.post('/', (request, response) =>{
-    if(request.body.message === undefined || request.body.message === ''){
-        request.flash('error', "Vous n'avez pas mis de message")
-        response.redirect('/')
-    } else {
-        let User = require('./models/user.model')
-    }
-}) */
 
 app.listen(config.port, ()=>{
     console.log('Express app listening')
