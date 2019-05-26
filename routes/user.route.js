@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Post = require('../models/blogPost')
+const Blog = require('../models/blogPost')
 
 // middleware that is specific to this router
 
@@ -10,7 +10,9 @@ router.use(function random(req, res, next) {
 });
 // define the user home page route
 router.get('/', function(req, res) {
-  res.render('../views/users/index')
+  var allBlog = Blog.find({})
+  console.log(allBlog)
+  res.render('../views/users/index', {allBlog: allBlog})
 });
 
 // define the CRUD route
@@ -35,11 +37,11 @@ router.get('/delete/:id', function(req, res) {
 
 router.post('/create', (req,res,next)=>{
   if(req.body.title && req.body.content){
-    var postData = {
+    var blogData = {
       title: req.body.title,
       content: req.body.content
     }
-    Post.create(postData, (error, post)=>{
+    Blog.create(blogData, (error, post)=>{
         if(error){
           return next(error)
         }else {
