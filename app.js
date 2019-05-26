@@ -3,6 +3,7 @@ const bodyParser = require ('body-parser')
 const mongoose = require('mongoose')
 const config = require('./config')
 const mainRouter = require('./routes/index')
+const user = require('./models/user')
 const userRouter = require('./routes/user.route.')
 const app = express()
 // Connection to MongoDB
