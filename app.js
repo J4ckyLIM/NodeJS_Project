@@ -2,7 +2,8 @@ const express = require('express')
 const bodyParser = require ('body-parser')
 const mongoose = require('mongoose')
 const config = require('./config')
-const userRouter = require('./routes/router')
+const mainRouter = require('./routes/index')
+const userRouter = require('./routes/user.route.')
 const app = express()
 // Connection to MongoDB
 
@@ -27,21 +28,12 @@ app.set('view engine', 'ejs')
 app.use('/assets', express.static('public'))
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
+
+//Routes
+
+app.use('/', mainRouter)
 app.use('/user', userRouter)
 
-// Routes
-
-app.get('/user', (req, res )=>{
-    res.render('index.ejs')
-})
-
-app.post('/user/signup', (req,res)=>{
-    res.render('signup.ejs')
-})
-
-app.post('/user/signin', (req,res)=>{
-    res.render('signin.ejs')
-}) 
 
 
 
