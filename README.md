@@ -1,8 +1,25 @@
 NodeJS_Project
 
+#NodeJS Project combine to Express 
 
-npm install
-Use the config.js File to change the database connection
+#Step 2
 
-mongod --dbpath ../data
-mongo.exe
+In your commander type: npm install
+To get the dependencies to run the project
+
+#Step 2 MongoDB
+
+Install MongoDB
+
+Get into config.js File to change the database connection value
+
+#Step 3
+
+In your commander again type: npm run start
+To run the project 
+
+#Step 4
+
+Enjoy :)
+
+
