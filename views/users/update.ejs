@@ -1,0 +1,20 @@
+<% include ../layout.ejs %>
+<% include ../index.ejs %>
+        <title>Modify a post</title>
+    <div class="jumbotron dark">
+        <h1>Modification du poste</h1>
+        </div>
+    </div>
+</div>
+<div class="col-sm-5 mx-auto">
+        <form action="./update" method="post">
+            <div class="form-group">
+                <label for="name">Titre</label>
+                <input name ="name" type="text" class="form-control" id="titleInput">
+            </div>
+            <div class="form-group">
+                <label for="content">Contenu</label>
+                <textarea name="content" type="text" class="form-control" id="contentInput" aria-describedby="contentHelp" style="min-height: 200px"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>

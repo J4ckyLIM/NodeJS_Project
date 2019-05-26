@@ -1,10 +1,5 @@
 const mongoose = require('mongoose')
-const bcryptjs =  require('bcryptjs')
 
-// Bcrypt variables for password hash
-
-const salt = bcryptjs.genSaltSync(10)
-const hash = bcryptjs.hashSync("B4c0/\/", salt)
 
 // Our schema for user
 
@@ -29,17 +24,5 @@ const userSchema = new mongoose.Schema({
 
 var User = mongoose.model('User', userSchema);
 
-// saving our new user 
-
-userSchema.pre('save', function(next){
-    var user = this
-    bcryptjs.hash(user.password, salt, (err, hash)=>{
-        if(err){
-            return next(err)
-        }
-        user.password = hash
-        next()
-    })
-})
 
 module.exports = User;
