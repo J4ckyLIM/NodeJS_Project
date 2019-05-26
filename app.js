@@ -35,7 +35,7 @@ app.use('/', mainRouter)
 app.use('/user', userRouter)
 
 
-
+// Error handler
 
 
 app.listen(config.port, ()=>{
