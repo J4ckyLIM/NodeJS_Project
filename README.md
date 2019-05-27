@@ -2,7 +2,7 @@ NodeJS_Project
 
 #NodeJS Project combine to Express 
 
-#Step 2
+#Step 1
 
 In your commander type: npm install
 To get the dependencies to run the project
